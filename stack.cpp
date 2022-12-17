@@ -45,6 +45,8 @@ template <class T> T LL::Stack<T>::pop()
     topNode = tempNode;
     return tempValue;
 }
+//return the value at an index in the stack starting from 1
+//the last into the stack has the index 1
 template <class T> T LL::Stack<T>::peek(const int& pos) const
 {
     if(pos < 1) throw std::runtime_error("error: input should be greater than 0\n");
@@ -56,12 +58,14 @@ template <class T> T LL::Stack<T>::peek(const int& pos) const
 }
 template <class T> T&  LL::Stack<T>::operator[](const int& pos)
 {
+    if(pos < 0) throw std::runtime_error("error: input should be greater or equal to 0\n");
     if(topNode == NULL) throw std::runtime_error("stack is empty\n");
     Node <T>* tempNode = topNode;
-    for(int i = 1; tempNode != NULL && i < pos; i++) tempNode = tempNode->next;
+    for(int i = 0; tempNode != NULL && i < pos; i++) tempNode = tempNode->next;
     if(tempNode == NULL) throw std::runtime_error("input exceeds stack\n");
     return tempNode->value;
 }
+//return the last into the stack
 template <class T> T LL::Stack<T>::sTop()
 {
     if(topNode == 0) throw std::runtime_error("stack is empty\n");
